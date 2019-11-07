@@ -1,11 +1,13 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+// import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { UserService } from '../../services/user.service';
+import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { cvForm } from 'src/app/shared/cvform.module';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-user-list',
@@ -16,7 +18,7 @@ export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   forms: Observable<any[]>;
   private exChangedSubscription: Subscription;
-  displayedColumns = ['name', 'surname', 'age', 'phone', 'email', 'address'];
+  displayedColumns = ['name', 'surname', 'phone', 'email', 'address','actions'];
   dataSource = new MatTableDataSource<cvForm>();
   sort: MatSort;
   paginator: MatPaginator; // matsort -> the name in html component
@@ -25,8 +27,8 @@ export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
     private userService: UserService,
     db: AngularFirestore
     ) {
-      this.forms = db.collection('cvForm').valueChanges();
-    }  // because we have our data in UserService
+      this.forms = db.collection('cvForm').valueChanges(); // because we have our data in UserService
+    }
 
   ngOnInit() {
     //  this.exChangedSubscription = this.userService.finishedcvFormsChanged.subscribe(

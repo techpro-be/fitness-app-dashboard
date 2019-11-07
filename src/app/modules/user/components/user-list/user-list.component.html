@@ -1,43 +1,31 @@
-<!-- <div fxLayoutAlign="center center" *ngFor="let form  of forms | async">
-  <div>
-    <h3>
-      {{forms.name}}
-    </h3>
-  </div>
-</div> -->
 
-<div fxLayoutAlign = "center center">
-  <mat-form-field fxFlex = "40%">
-  <input matInput type= "text" (keyup)="doFilter($event.target.value)" placeholder="Search for applicants"> <!-- keyup, a event listener that fires dofilter method-->
- </mat-form-field>
-</div>
-  <div>
-    <input type="button" value="CPTURE" (click)="captureScreen()"/>
+
+
+
+  <div fxLayoutAlign="center center">
+    <button  mat-button color="primary" mat-button  (click)="captureScreen()">Print CV</button>
   </div>
+
  <mat-table  [dataSource]="forms" matSort  id="contentToConvert">
 
    <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  > Name</mat-header-cell>
     <mat-cell *matCellDef="let element"> {{element.name }} </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="surname">
+  <ng-container matColumnDef="surname" >
       <mat-header-cell *matHeaderCellDef> Surname</mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.surname }} </mat-cell>
     </ng-container>
 
-     <ng-container matColumnDef="age">
-        <mat-header-cell *matHeaderCellDef> Age</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.age }} </mat-cell>
-      </ng-container>
 
       <ng-container matColumnDef="phone">
-          <mat-header-cell *matHeaderCellDef> Phone</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef > Phone</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.phone }} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="email">
-            <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef  > Email</mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.email }} </mat-cell>
           </ng-container>
         <ng-container matColumnDef="address">
@@ -45,7 +33,15 @@
             <mat-cell *matCellDef="let element"> {{element.address }} </mat-cell>
           </ng-container>
 
-   <mat-header-row *matHeaderRowDef="displayedColumns"> </mat-header-row>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell  *matHeaderCellDef > Actions </mat-header-cell>
+            <mat-cell *matCellDef="let row" >
+                 <button  color="warn" mat-button >Delete</button>
+                 <button  color="primary" mat-button >Show</button>
+            </mat-cell>
+          </ng-container>
+
+   <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"> </mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"> </mat-row>
 
 </mat-table>
