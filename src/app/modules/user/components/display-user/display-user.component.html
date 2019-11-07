@@ -1,1 +1,77 @@
-<p>display-user works!</p>
+<div fxLayoutAlign="center center">
+        <button  mat-button color="primary" mat-button  (click)="captureScreen()">Print CV</button>
+</div>
+<div *ngFor="let form of forms">
+<div id="contentToConvert">
+
+<div class="bg-image-header margin-b">
+  <div fxlayout="column"  fxLayoutAlign="start center">
+    <div fxLayout="row" fxLayoutGap="5px;">
+        <div>{{form.name}}</div> <div>{{form.surname.charAt(0)}}.</div>
+    </div>
+    <div>{{form.position}}</div>
+  </div>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="start center" >
+  <div>
+    <h2>Personal Background</h2>
+    <div>{{form.personalBackground}}</div>
+  </div>
+</div>
+
+<!-- <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
+      <div>
+        <h2>Work Eksperience</h2>
+      </div>
+      <div *ngFor="let experience of experiences">
+        <div fxLayout="row">
+          <div>{{experience.startDate}} -</div><div>{{experience.endDate}}</div>
+        </div>
+        <div>{{experience.position}}</div>
+        <div>{{experience.employer}}</div>
+        <div>{{experience.jobDescription}}</div>
+      </div>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
+  <div>
+    <h2>Education</h2>
+  </div>
+  <div *ngFor="let education of educations">
+    <div fxLayout="row">
+      <div>{{education.startingYear}} - </div>-<div>{{education.passingYear}}</div>
+    </div>
+    <div fxLayout="row">
+      <div>{{education.degree}}</div>at<div> at {{education.college}}</div>
+    </div>
+  </div>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
+  <div>
+    <h2>Language</h2>
+  </div>
+  <div fxLayout="column" *ngFor="let language of languages">
+    <div>{{language.name}}</div>
+  </div>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
+    <div>
+      <h2>IT Knowledge</h2>
+    </div>
+    <div fxLayout="column" *ngFor="let language of itlanguages">
+      <div fxLayout="row">
+          <div>{{language.name}}</div>
+          <div *ngIf="itlanguage.level==beginner">
+            <img src="level1.jpg" alt="Beginner">
+          </div>
+      </div>
+    </div>
+  </div> -->
+
+<div  class="bg-image-footer">
+</div>
+</div>
+</div>

@@ -18,7 +18,7 @@ export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   forms: Observable<any[]>;
   private exChangedSubscription: Subscription;
-  displayedColumns = ['name', 'surname', 'phone', 'email', 'address','actions'];
+  displayedColumns = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
   dataSource = new MatTableDataSource<cvForm>();
   sort: MatSort;
   paginator: MatPaginator; // matsort -> the name in html component
