@@ -1,41 +1,39 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
-// import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { UserService } from '../../services/user.service';
 import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { cvForm } from 'src/app/shared/cvform.module';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar } from '@angular/material';
+
+
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
+export class UserListComponent implements OnInit, AfterViewInit {
 
-  forms: Observable<any[]>;
-  private exChangedSubscription: Subscription;
+  forms: Observable<any>;
+
   displayedColumns = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
   dataSource = new MatTableDataSource<cvForm>();
   sort: MatSort;
-  paginator: MatPaginator; // matsort -> the name in html component
+  paginator: MatPaginator;
 
   constructor(
     private userService: UserService,
-    db: AngularFirestore
+    private snackBar: MatSnackBar,
+    public afs: AngularFirestore
     ) {
-      this.forms = db.collection('cvForm').valueChanges(); // because we have our data in UserService
-    }
+      this.forms = afs.collection('cvForm').valueChanges();
+     }
 
   ngOnInit() {
-    //  this.exChangedSubscription = this.userService.finishedcvFormsChanged.subscribe(
-    //   (cvForms: cvForm[]) => {
-    //   this.dataSource.data = cvForms;
-    // });
-    //  this.userService.fetchCompletedOrCancelledcvForms();
+
   }
 
   ngAfterViewInit() {
@@ -45,9 +43,20 @@ export class UserListComponent implements OnInit, AfterViewInit, OnDestroy {
   doFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();  // filter property makes as the work
   }
-   ngOnDestroy() {
-    this.exChangedSubscription.unsubscribe();
-   }
+
+  onDelete() {
+    this.userService.deleteUser(this.forms)
+    .then(
+      res => {
+        this.snackBar.open('CV was deleted successfully ', null, {
+          duration: 3000
+        });
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
 
    public captureScreen() {
     const data = document.getElementById('contentToConvert');

@@ -13,8 +13,6 @@ export class UserService {
   cvFormsChanged = new Subject <cvForm[]>();
   finishedcvFormsChanged = new Subject <cvForm[]>();
 
-  private availablecvForms: cvForm[] = [];
-  private runningcvForm: cvForm;
   private fbSubs: Subscription[] = [];
 
   constructor( private db: AngularFirestore) { }
@@ -40,40 +38,7 @@ export class UserService {
   //     }));
   // }
 
-  // startcvForm(selectedId: string) {
-  //     this.runningcvForm = this.availablecvForms.find( ex => ex.id === selectedId
-  //          );  // return true if object cvForm is found
 
-  //     this.cvFormChanged.next({ ...this.runningcvForm}); // return the same properties as ex object
-  // }
-
-  // completecvForm() {
-  //     this.addDataToDatabase({
-  //         ...this.runningcvForm,
-  //         date: new Date,
-  //         state: 'completed'
-  //     });
-
-  //     this.runningcvForm = null;
-  //     this.cvFormChanged.next(null);
-  // }
-
-  // cancelcvForm(progress: number) {
-  //     this.addDataToDatabase({
-  //         ...this.runningcvForm,
-  //         duration: this.runningcvForm.duration * (progress / 100 ),
-  //         calories: this.runningcvForm.calories * (progress / 100 ),
-  //         date: new Date,
-  //         state: 'canceled'
-  //     });
-
-  //     this.runningcvForm = null;
-  //     this.cvFormChanged.next(null);
-  //     }
-
-  getRunningcvForm() {
-          return {...this.runningcvForm};
-  }
 
   fetchCompletedOrCancelledcvForms() {
       this.fbSubs.push(this.db
@@ -91,5 +56,7 @@ export class UserService {
   // private addDataToDatabase(cvForm: cvForm) {
   //         this.db.collection('finishedcvForms').add(cvForm);  // stores the finished/canceled cvForm to database
   // }
-
+  deleteUser(userKey) {
+    return this.db.collection('users').doc(userKey).delete();
+  }
 }

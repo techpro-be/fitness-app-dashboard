@@ -3,7 +3,10 @@ import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
+import { cvForm } from 'src/app/shared/cvform.module';
+
 
 @Component({
   selector: 'app-display-user',
@@ -12,30 +15,29 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class DisplayUserComponent implements OnInit {
 
-  @Output() forms: Observable<any[]>;
+  private resumeCollection: AngularFirestoreCollection<cvForm>;
+  resumes: Observable<any>;
+
   constructor(
-    private userService: UserService,
-    db: AngularFirestore
-    ) {
-      this.forms = db.collection('cvForm').valueChanges(); // because we have our data in UserService
+   private userService: UserService,
+   public afs: AngularFirestore
+   ) {
+     // this.resumeCollection = afs.collection<cvForm>('cvForm');
+     // this.resumes = this.resumeCollection.valueChanges();
+
+     // this.resumes = this.afs.collection('cvForm')
+     //  .snapshotChanges()
+     //  .pipe(map(response => {
+     //    return response.map(cvdata => {
+     //      const resume = cvdata.payload.doc.data() as cvForm;
+     //      console.log('Data', resume);
+     //      return resume;
+     //    });
+     //  }));
     }
 
   ngOnInit() {
-  }
-  public captureScreen() {
-    const data = document.getElementById('contentToConvert');
-    html2canvas(data).then(canvas => {
-      // Few necessary setting options
-      const imgWidth = 208;
-      const pageHeight = 295;
-      const imgHeight = canvas.height * imgWidth / canvas.width;
-      const heightLeft = imgHeight;
 
-      const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
-      const position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('MYPdf.pdf'); // Generated PDF
-    });
   }
+
 }

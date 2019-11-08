@@ -7,12 +7,12 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'user'
+    redirectTo: '/user-list'
   },
-  {
-    path: 'user',
-    loadChildren: 'src/app/modules/user/user.module#UserModule'
-  },
+  // {
+  //   path: 'user',
+  //   loadChildren: 'src/app/modules/user/user.module#UserModule'
+  // },
   {
     path: '**',
     component: NotFoundComponent
