@@ -9,10 +9,10 @@ const routes: Routes = [
     pathMatch: 'full',
     redirectTo: '/user-list'
   },
-  // {
-  //   path: 'user',
-  //   loadChildren: 'src/app/modules/user/user.module#UserModule'
-  // },
+  {
+    path: 'user',
+    loadChildren: 'src/app/modules/user/user.module#UserModule'
+  },
   {
     path: '**',
     component: NotFoundComponent

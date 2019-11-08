@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
+import { NavbarComponent } from 'src/app/navbar/navbar.component';
 
 
 @NgModule({

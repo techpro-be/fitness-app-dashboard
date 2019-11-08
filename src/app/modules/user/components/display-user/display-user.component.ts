@@ -5,7 +5,9 @@ import { Observable } from 'rxjs';
 import { UserService } from '../../services/user.service';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { cvForm } from 'src/app/shared/cvform.module';
+import { Resume } from 'src/app/shared/Resume.module';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -15,29 +17,8 @@ import { cvForm } from 'src/app/shared/cvform.module';
 })
 export class DisplayUserComponent implements OnInit {
 
-  private resumeCollection: AngularFirestoreCollection<cvForm>;
-  resumes: Observable<any>;
+  constructor() {}
 
-  constructor(
-   private userService: UserService,
-   public afs: AngularFirestore
-   ) {
-     // this.resumeCollection = afs.collection<cvForm>('cvForm');
-     // this.resumes = this.resumeCollection.valueChanges();
-
-     // this.resumes = this.afs.collection('cvForm')
-     //  .snapshotChanges()
-     //  .pipe(map(response => {
-     //    return response.map(cvdata => {
-     //      const resume = cvdata.payload.doc.data() as cvForm;
-     //      console.log('Data', resume);
-     //      return resume;
-     //    });
-     //  }));
-    }
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
 }

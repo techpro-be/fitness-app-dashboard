@@ -1,4 +1,4 @@
- export interface cvForm {
+ export interface Resume {
   id: string;
   name: string;
   surname: string;

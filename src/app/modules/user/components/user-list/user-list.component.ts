@@ -3,7 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserService } from '../../services/user.service';
 import { SharedModule } from 'src/app/shared/modules/shared.module';
-import { cvForm } from 'src/app/shared/cvform.module';
+import { Resume } from 'src/app/shared/resume.module';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar } from '@angular/material';
@@ -17,10 +17,10 @@ import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar } from '@angular
 })
 export class UserListComponent implements OnInit, AfterViewInit {
 
-  forms: Observable<any>;
+  resumes: Observable<any>;
 
   displayedColumns = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
-  dataSource = new MatTableDataSource<cvForm>();
+  dataSource = new MatTableDataSource<Resume>();
   sort: MatSort;
   paginator: MatPaginator;
 
@@ -29,7 +29,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
     private snackBar: MatSnackBar,
     public afs: AngularFirestore
     ) {
-      this.forms = afs.collection('cvForm').valueChanges();
+      this.resumes = afs.collection('cvForm').valueChanges();
      }
 
   ngOnInit() {
@@ -44,18 +44,8 @@ export class UserListComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();  // filter property makes as the work
   }
 
-  onDelete() {
-    this.userService.deleteUser(this.forms)
-    .then(
-      res => {
-        this.snackBar.open('CV was deleted successfully ', null, {
-          duration: 3000
-        });
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  onDelete(resume) {
+    this.userService.deleteUser(resume);
   }
 
    public captureScreen() {

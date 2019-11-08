@@ -8,16 +8,18 @@ import { AngularFireModule } from '@angular/fire';
 import { UserModule } from './modules/user/user.module';
 import { SharedModule } from './shared/modules/shared.module';
 import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     UserModule,
     SharedModule,
+    AppRoutingModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase)
