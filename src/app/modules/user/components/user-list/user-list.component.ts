@@ -1,14 +1,9 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { Component, OnInit, AfterViewInit} from '@angular/core';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { UserService } from '../../services/user.service';
-import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { Resume } from 'src/app/shared/resume.module';
-import * as jspdf from 'jspdf';
-import html2canvas from 'html2canvas';
-import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar } from '@angular/material';
-
-
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-list',
@@ -17,7 +12,10 @@ import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar } from '@angular
 })
 export class UserListComponent implements OnInit, AfterViewInit {
 
-  resumes: Observable<any>;
+  id: any;
+  resumeDoc: AngularFirestoreDocument<Resume>;
+  resumeCollection: AngularFirestoreCollection<Resume>;
+  resumes: any = [];
 
   displayedColumns = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
   dataSource = new MatTableDataSource<Resume>();
@@ -26,44 +24,37 @@ export class UserListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private userService: UserService,
-    private snackBar: MatSnackBar,
     public afs: AngularFirestore
-    ) {
-      this.resumes = afs.collection('cvForm').valueChanges();
-     }
+    ) {}
 
   ngOnInit() {
 
+    this.resumeCollection = this.afs.collection('cvForm' , ref => ref.orderBy('name', 'asc'));
+    this.resumes = this.resumeCollection
+       .snapshotChanges()
+       .pipe(map(response => {
+         return response.map(cvdata => {
+           const data = cvdata.payload.doc.data() as Resume;
+           this.id = cvdata.payload.doc.id;
+           return data;
+         });
+       }));
   }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
+
   doFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();  // filter property makes as the work
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onDelete(resume) {
-    this.userService.deleteUser(resume);
+  onDeleteForm(id) {
+    this.userService.deleteUser(id);
   }
 
-   public captureScreen() {
-    const data = document.getElementById('contentToConvert');
-    html2canvas(data).then(canvas => {
-      // Few necessary setting options
-      const imgWidth = 208;
-      const pageHeight = 295;
-      const imgHeight = canvas.height * imgWidth / canvas.width;
-      const heightLeft = imgHeight;
 
-      const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
-      const position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('MYPdf.pdf'); // Generated PDF
-    });
-  }
 }
 
 

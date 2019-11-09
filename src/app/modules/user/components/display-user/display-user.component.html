@@ -1,43 +1,45 @@
 
-<!-- <div id="contentToConvert">
+<!-- <div id="contentToConvert" *ngIf="resume"> -->
 
-<div class="bg-image-header margin-b">
-  <div fxlayout="column"  fxLayoutAlign="start center">
-    <div fxLayout="row" fxLayoutGap="5px;">
-        <div>{{resume.name}}</div> <div>{{resume.surname.charAt(0)}}.</div>
-    </div>
-    <div>{{resume.position}}</div>
+<form  id="contentToConvert" *ngIf="resume">
+  <div fxlayout="column" class="bg-image-header" fxLayoutGap="16px">
+     <div fxLayout="row" fxLayoutGap="10px;">
+        <div class="name"><h2>{{resume.name}}</h2></div>
+        <div></div>
+        <div class="surname"><h2>{{resume.surname.charAt(0)}}.</h2></div>
+      </div>
+      <div class="position"><h3> {{resume.position}}</h3></div>
   </div>
-</div>
 
-<div fxLayout="column" fxLayoutAlign="start center" >
+
+<div fxLayout="column">
   <div>
     <h2>Personal Background</h2>
-    <div>{{resume.personalBackground}}</div>
+    <div class="ml-2">{{resume.personalBackground}}</div>
   </div>
 </div>
 
-<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
-      <div>
-        <h2>Work Eksperience</h2>
-      </div>
-      <div *ngFor="let experience of experiences">
+<div fxLayout="column">
+
+        <h2>Work Eksperiences</h2>
+
+      <div class="ml-2 mb-2" *ngFor="let experience of resume.experiences" fxLayoutGap="10px;">
         <div fxLayout="row">
-          <div>{{experience.startDate}} -</div><div>{{experience.endDate}}</div>
+          <div>{{experience.startDate}}</div> <div class="m-l-r">till</div><div>{{experience.endDate}}</div>
         </div>
-        <div>{{experience.position}}</div>
+        <div><p> {{experience.position}}</p></div>
         <div>{{experience.employer}}</div>
         <div>{{experience.jobDescription}}</div>
       </div>
 </div>
 
-<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
-  <div>
-    <h2>Education</h2>
-  </div>
-  <div *ngFor="let education of educations">
+<div fxLayout="column" fxLayoutGap="5px;">
+
+    <h2>Education & Trainings</h2>
+
+  <div  class="ml-2 mb-2" *ngFor="let education of resume.educations">
     <div fxLayout="row">
-      <div>{{education.startingYear}} - </div>-<div>{{education.passingYear}}</div>
+      <div> {{education.startingYear}}</div><div class="m-l-r">till</div><div>{{education.passingYear}}</div>
     </div>
     <div fxLayout="row">
       <div>{{education.degree}}</div>at<div> at {{education.college}}</div>
@@ -45,33 +47,36 @@
   </div>
 </div>
 
-<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
+<div fxLayout="column" fxLayoutGap="5px;">
   <div>
-    <h2>Language</h2>
+    <h2>Languages</h2>
   </div>
-  <div fxLayout="column" *ngFor="let language of languages">
-    <div>{{language.name}}</div>
+  <div class="ml-2 mb-2" fxLayout="column" *ngFor="let language of resume.languages" fxLayoutGap="10px;">
+    <div>{{language.languageName}}</div>
   </div>
 </div>
 
-<div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
+<div fxLayout="column" fxLayoutGap="5px;">
     <div>
-      <h2>IT Knowledge</h2>
+      <h2>IT Knowledges</h2>
     </div>
-    <div fxLayout="column" *ngFor="let language of itlanguages">
+    <div  class="ml-2 mb-2"  fxLayout="column" *ngFor="let itlanguage of resume.itlanguages">
       <div fxLayout="row">
-          <div>{{language.name}}</div>
-          <div *ngIf="itlanguage.level==beginner">
-            <img src="level1.jpg" alt="Beginner">
-          </div>
+          <div>{{itlanguage.itSkill}}</div>
+          <div>{{itlanguage.level}}</div>
+          <!-- <div *ngIf="itlanguage.level=='beginner'">
+            <h4>Beginner</h4>
+          </div> -->
       </div>
     </div>
   </div>
 
-    <div  class="bg-image-footer">
-    </div>
-</div>
+  <div class="bg-image-footer">
+   </div>
 
-<div fxLayoutAlign="center center">
-        <button  mat-button color="primary" mat-button  (click)="captureScreen()">Print CV</button>
-</div> -->
+</form>
+
+<div fxLayout="row" fxLayoutGap="20px" >
+  <button mat-raised-button color="primary"  class="ml-1" (click)="captureScreen()"> Download CV</button>
+  <button mat-raised-button color="warn" [routerLink]="['/user-list']" routerLinkActive="router-link-active" > Back</button>
+</div>

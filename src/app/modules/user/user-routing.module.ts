@@ -6,11 +6,14 @@ import { DisplayUserComponent } from './components/display-user/display-user.com
 const routes: Routes = [
     {
       path: 'user-list',
-      component: UserListComponent
+      component: UserListComponent,
+      pathMatch: 'full'
     },
-    { path: 'display-user/:id',
+
+    {path: 'display-user/:id',
+    pathMatch: 'full',
     component: DisplayUserComponent
-  }
+    }
 ];
 
 @NgModule({

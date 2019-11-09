@@ -1,8 +1,4 @@
 
-  <div fxLayoutAlign="center center">
-    <button  mat-button color="primary" mat-button  (click)="captureScreen()">Print CV</button>
-  </div>
-
   <mat-tab-group>
     <mat-tab  label= "Applicants" fxLayoutAlign="center center">
 
@@ -15,7 +11,7 @@
 
         <ng-container matColumnDef="surname" >
             <mat-header-cell *matHeaderCellDef> Surname</mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.surname }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.surname.charAt(0)}}. </mat-cell>
           </ng-container>
 
 
@@ -36,8 +32,9 @@
                 <ng-container matColumnDef="actions">
                   <mat-header-cell  *matHeaderCellDef > Actions </mat-header-cell>
                   <mat-cell *matCellDef="let row" >
-                      <button  color="warn" mat-button (click)="onDelete()">Delete</button>
-                      <button  color="primary" mat-button>Show</button>
+                      <button  mat-raised-button color="warn" class="ml-1" onclick="onDeleteForm()">Delete</button>
+                      <button mat-raised-button color="primary"  [routerLink]="['/display-user', id]"
+                      routerLinkActive="router-link-active">Show</button>
                   </mat-cell>
                 </ng-container>
 
@@ -50,83 +47,4 @@
       </mat-paginator>
     </mat-tab>
 </mat-tab-group>
-
-<div fxLayout="column" fxLayoutGap="8px;" fxLayoutAlign="start center">
-
-    <div>
-        <img src="src/assets/images/Header-v2.png" alt="Tech pro">
-      </div>
-    <div fxlayout="column"  fxLayoutAlign="start center">
-      <div fxLayout="row" fxLayoutGap="5px;">
-          <div>Name</div> <div>S.</div>  <!-- {{resume.name}}{{resume.surname.charAt(0)}}{{resume.position}} -->
-      </div>
-      <div>
-          Position
-    </div>
-    </div>
-
-
-  <div fxLayout="column" fxLayoutAlign="start center" >
-    <div>
-      <h2>Personal Background</h2>
-      <div>Background</div>  <!--{{resume.personalBackground}} -->
-    </div>
-  </div>
-
-  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
-        <div>
-          <h2>Work Eksperience</h2>
-        </div>
-        <div fxLayout="column">   <!-- {{experience.startDate}}{{experience.jobDescription}}{{experience.employer}}{{experience.position}}{{experience.endDate}}-->
-          <div fxLayout="row">
-            <div> Start-</div><div>End</div>
-          </div>
-          <div>Position</div>
-          <div>Employer</div>
-          <div>Job desc</div>
-        </div>
-  </div>
-
-  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
-    <div>
-      <h2>Education</h2>
-    </div>
-    <div> <!-- {{education.startingYear}}{{education.college}}{{education.degree}}{{education.passingYear}} -->
-      <div fxLayout="row">
-        <div> Year- </div>-<div>Year</div>
-      </div>
-      <div fxLayout="row">
-        <div>Degree</div><div> at  School</div>
-      </div>
-    </div>
-  </div>
-
-  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
-    <div>
-      <h2>Language</h2>
-    </div>
-    <div fxLayout="column">
-      <div>Language name</div><!-- {{language.name}} -->
-    </div>
-  </div>
-
-  <div fxLayout="column" fxLayoutAlign="start center" fxLayoutGap="5px;">
-      <div>
-        <h2>IT Knowledge</h2> <!-- {{language.name}} -->
-      </div>
-      <div fxLayout="column">
-        <div fxLayout="row">
-            <div>Skill</div>
-            <!-- <div *ngIf="itlanguage.level==beginner">
-              <img src="level1.jpg" alt="Beginner">
-            </div> -->
-        </div>
-      </div>
-  </div>
-
-    <div>
-      <img src="src/assets/images/footer-v1.png" alt="Tech pro">
-    </div>
-
-</div>
 
