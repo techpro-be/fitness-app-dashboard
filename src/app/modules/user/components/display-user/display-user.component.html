@@ -2,7 +2,8 @@
 <!-- <div id="contentToConvert" *ngIf="resume"> -->
 
 <form  id="contentToConvert" *ngIf="resume">
-  <div fxlayout="column" class="bg-image-header" fxLayoutGap="16px">
+
+  <div fxlayout="column" class="bg-image-header" fxLayoutGap="16px">  <!--Header-->
      <div fxLayout="row" fxLayoutGap="10px;">
         <div class="name"><h2>{{resume.name}}</h2></div>
         <div></div>
@@ -12,16 +13,16 @@
   </div>
 
 
-<div fxLayout="column">
+<div fxLayout="column">   <!--Personal Background-->
   <div>
     <h2>Personal Background</h2>
     <div class="ml-2">{{resume.personalBackground}}</div>
   </div>
 </div>
 
-<div fxLayout="column">
+<div fxLayout="column">   <!--Experience-->
 
-        <h2>Work Eksperiences</h2>
+        <h2>Work Experience</h2>
 
       <div class="ml-2 mb-2" *ngFor="let experience of resume.experiences" fxLayoutGap="10px;">
         <div fxLayout="row">
@@ -33,7 +34,7 @@
       </div>
 </div>
 
-<div fxLayout="column" fxLayoutGap="5px;">
+<div fxLayout="column" fxLayoutGap="5px;">   <!--Education-->
 
     <h2>Education & Trainings</h2>
 
@@ -42,23 +43,28 @@
       <div> {{education.startingYear}}</div><div class="m-l-r">till</div><div>{{education.passingYear}}</div>
     </div>
     <div fxLayout="row">
-      <div>{{education.degree}}</div>at<div> at {{education.college}}</div>
+      <div>{{education.degree}}</div> <div class="m-l-r">at</div> <div>{{education.college}}</div>
     </div>
   </div>
 </div>
 
-<div fxLayout="column" fxLayoutGap="5px;">
+<div fxLayout="column" fxLayoutGap="5px;">  <!--Languages-->
   <div>
     <h2>Languages</h2>
   </div>
   <div class="ml-2 mb-2" fxLayout="column" *ngFor="let language of resume.languages" fxLayoutGap="10px;">
-    <div>{{language.languageName}}</div>
+    <div fxLayout="row" fxLayoutGap="20px;">
+      <div>{{language.languageName}}</div>
+      <div class="m-l-r"></div>
+      <div>{{language.languageLevel}}</div>
+    </div>
+
   </div>
 </div>
 
-<div fxLayout="column" fxLayoutGap="5px;">
+<div fxLayout="column" fxLayoutGap="5px;">   <!--IT Knowledge-->
     <div>
-      <h2>IT Knowledges</h2>
+      <h2>IT Knowledge</h2>
     </div>
     <div  class="ml-2 mb-2"  fxLayout="column" *ngFor="let itlanguage of resume.itlanguages">
       <div fxLayout="row">

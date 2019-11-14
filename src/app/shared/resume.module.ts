@@ -43,5 +43,6 @@
 
  export interface Language {
   languageName: string;
+  level: string;
 }
 
