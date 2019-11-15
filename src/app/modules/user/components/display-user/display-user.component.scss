@@ -15,14 +15,21 @@
 
 .name{
   margin-left: 90px;
-  margin-top: 75px;
+  margin-top: 70px;
   color: white;
 }
 
 .surname{
 margin-left: 10px;
-  margin-top: 75px;
+  margin-top: 70px;
   color: white;
+}
+
+.user-profile{
+  border-radius: 50%;
+    width: 129px;
+    margin-left: 188px;
+    margin-top: 32px;
 }
 
 .position{
@@ -36,6 +43,10 @@ margin-left: 10px;
 
   .mb-2{
     margin-bottom: 20px;
+  }
+
+  .mb-1{
+    margin-bottom: 10px;
   }
 
   .m-l-r{

@@ -6,10 +6,10 @@
   <div fxlayout="column" class="bg-image-header" fxLayoutGap="16px">  <!--Header-->
      <div fxLayout="row" fxLayoutGap="10px;">
         <div class="name"><h2>{{resume.name}}</h2></div>
-        <div></div>
         <div class="surname"><h2>{{resume.surname.charAt(0)}}.</h2></div>
+        <div> <img src="{{resume.profilePic}}"  class="user-profile "alt="Profile"></div>
       </div>
-      <div class="position"><h3> {{resume.position}}</h3></div>
+      <div><p>{{resume.position}} </p></div>
   </div>
 
 
@@ -29,8 +29,8 @@
           <div>{{experience.startDate}}</div> <div class="m-l-r">till</div><div>{{experience.endDate}}</div>
         </div>
         <div><p> {{experience.position}}</p></div>
-        <div>{{experience.employer}}</div>
-        <div>{{experience.jobDescription}}</div>
+        <div class="mb-1">{{experience.employer}}</div>
+        <div><p>{{experience.jobDescription}}</p></div>
       </div>
 </div>
 
@@ -66,14 +66,13 @@
     <div>
       <h2>IT Knowledge</h2>
     </div>
-    <div  class="ml-2 mb-2"  fxLayout="column" *ngFor="let itlanguage of resume.itlanguages">
-      <div fxLayout="row">
-          <div>{{itlanguage.itSkill}}</div>
-          <div>{{itlanguage.level}}</div>
-          <!-- <div *ngIf="itlanguage.level=='beginner'">
-            <h4>Beginner</h4>
-          </div> -->
+    <div class="ml-2 mb-2" fxLayout="column" *ngFor="let itlanguage of resume.itKnowledge" fxLayoutGap="10px;">
+      <div fxLayout="row" fxLayoutGap="20px;">
+        <div>{{itlanguage.itSkill}}</div>
+        <div class="m-l-r"></div>
+        <div>{{itlanguage.level}}</div>
       </div>
+
     </div>
   </div>
 
