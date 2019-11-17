@@ -8,23 +8,25 @@
           <div fxLayout="row">
                 <div class="name"><h2>{{resume.name}}</h2></div>
                 <div class="surname"><h2>{{resume.surname.charAt(0)}}.</h2></div>
-
                 <div> <img src="{{resume.profilePic}}" class="user-profile" alt="Profile"></div>
           </div>
             <div><p class="position">{{resume.position}} </p></div>
         </div>
     </div>
 
-    <div fxLayout="column">   <!--Personal Background-->
-      <div>
+    <div fxLayout="column" fxLayoutGap="10px">   <!--Personal Background-->
+      <div class="ml-2">
         <h2>Personal Background</h2>
-        <div class="ml-2">{{resume.personalBackground}}</div>
+        <div>{{resume.personalBackground}}</div>
       </div>
+          <mat-divider></mat-divider>
     </div>
 
-    <div fxLayout="column">   <!--Experience-->
 
-            <h2>Work Experience</h2>
+    <div fxLayout="column">   <!--Experience-->
+           <div class="ml-2" >
+              <h2>Work Experience</h2>
+           </div>
 
           <div class="ml-2 mb-2" *ngFor="let experience of resume.experiences" fxLayoutGap="10px;">
             <div fxLayout="row">
@@ -34,12 +36,14 @@
             <div class="mb-1">{{experience.employer}}</div>
             <div><p>{{experience.jobDescription}}</p></div>
           </div>
+<mat-divider></mat-divider>
+
     </div>
 
     <div fxLayout="column" fxLayoutGap="5px;">   <!--Education-->
-
-        <h2>Education & Trainings</h2>
-
+        <div class="ml-2">
+          <h2>Education & Trainings</h2>
+        </div>
       <div  class="ml-2 mb-2" *ngFor="let education of resume.educations">
         <div fxLayout="row">
           <div> {{education.startingYear}}</div><div class="m-l-r">till</div><div>{{education.passingYear}}</div>
@@ -48,10 +52,11 @@
           <div>{{education.degree}}</div> <div class="m-l-r">at</div> <div>{{education.college}}</div>
         </div>
       </div>
+      <mat-divider></mat-divider>
     </div>
 
     <div fxLayout="column" fxLayoutGap="5px;">  <!--Languages-->
-      <div>
+      <div class="ml-2">
         <h2>Languages</h2>
       </div>
       <div class="ml-2 mb-2" fxLayout="column" *ngFor="let language of resume.languages" fxLayoutGap="10px;">
@@ -60,21 +65,35 @@
           <div class="m-l-r"></div>
           <div>{{language.languageLevel}}</div>
         </div>
-
       </div>
+      <mat-divider></mat-divider>
     </div>
 
-    <div fxLayout="column" fxLayoutGap="5px;">   <!--IT Knowledge-->
+    <div  class="ml-2" fxLayout="column" fxLayoutGap="5px;">   <!--IT Knowledge-->
         <div>
           <h2>IT Knowledge</h2>
         </div>
-        <div class="ml-2 mb-2" fxLayout="column" *ngFor="let itlanguage of resume.itKnowledge" fxLayoutGap="10px;">
-          <div fxLayout="row" fxLayoutGap="20px;">
-            <div>{{itlanguage.itSkill}}</div>
-            <div class="m-l-r"></div>
-            <div>{{itlanguage.level}}</div>
-          </div>
+        <div class=" mb-2" fxLayout="column" *ngFor="let itlanguage of resume.itKnowledge" fxLayoutGap="10px;">
+          <div fxLayout="column" fxLayoutGap="20px;">
+            <div fxLayout="row" fxLayoutGap=15px>
+              <div>{{itlanguage.itSkill}}</div>
+              <div>{{itlanguage.level}}</div>
+            </div>
 
+            <div class="m-l-r"></div>
+            <div *ngIf="itlanguage.level=='Beginner'">
+              <img src="assets/images/beginner.png" alt="Beginner">
+            </div>
+            <div *ngIf="itlanguage.level=='Intermediate'">
+              <img src="assets/images/intermediate.png" alt="Intermediate">
+            </div>
+            <div *ngIf="itlanguage.level=='Advanced'">
+              <img src="assets/images/advanced.png" alt="Advanced">
+            </div>
+            <div *ngIf="itlanguage.level=='Expert'">
+              <img src="assets/images/expert.png" alt="Expert">
+            </div>
+          </div>
         </div>
       </div>
 
