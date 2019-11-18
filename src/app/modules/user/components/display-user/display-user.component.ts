@@ -4,6 +4,9 @@ import html2canvas from 'html2canvas';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Resume } from 'src/app/shared/resume.module';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-display-user',
@@ -12,21 +15,27 @@ import { Input } from '@angular/core';
 })
 export class DisplayUserComponent implements OnInit {
 
-  @Input() resumes;
   @ViewChild('content', {static: false}) content: ElementRef;
-  resume: any;
+  resume$: Observable<Resume>;
+  id: string;
+
   constructor(
     private route: ActivatedRoute,
+    public afs: AngularFirestore,
     private userService: UserService) {
-
+      this.route.params.subscribe(params => this.id = params.id);
   }
-  // this.route.paramMap.subscribe(params => {
+
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.userService.getObjectById(params.id).subscribe( i => {
-        this.resume = i;
-    });
-    });
+
+    // this.route.params.subscribe(params => {
+    //   this.userService.getObjectById(params.id).subscribe( id => {
+    //     this.resume = id;
+    // });
+    // });
+    this.resume$ = this.afs
+       .doc<Resume>('cvForm/' + this.id)
+       .valueChanges();
   }
 
   public downloadCv() {
@@ -56,6 +65,7 @@ export class DisplayUserComponent implements OnInit {
       elementHandlers : specialElementHandlers
     });
 
+    // tslint:disable-next-line: only-arrow-functions
     setTimeout(function() {
       doc.save('Cv.pdf');
   }, 0);

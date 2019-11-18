@@ -11,9 +11,10 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
-  resumeDoc: AngularFirestoreDocument<Resume>;
+
   resumeCollection: AngularFirestoreCollection<Resume>;
   resumes: Observable<any>;
+  resumeDoc: AngularFirestoreDocument<Resume>;
   constructor( private afs: AngularFirestore) {}
 
 
@@ -24,6 +25,15 @@ export class UserService {
 
   getObjectById(id) {
     return this.afs.collection('cvForm').doc(id).valueChanges();
+  }
+
+  getUsers() {
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('/cvForm').snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots);
+      });
+    });
   }
 
 }

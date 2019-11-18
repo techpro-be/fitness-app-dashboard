@@ -1,14 +1,15 @@
 
 <div fxFlex="30"></div> <!--First empty div-->
 <div>
-<div  #content *ngIf="resume">
+<div  #content *ngIf="resume$ | async as resume">
 
-    <div fxlayout="row" class="bg-image-header" fxLayoutGap="16px">  <!--Header-->
+    <div fxlayout="row" class="bg-image-header ml-2" fxLayoutGap="16px">  <!--Header-->
         <div fxLayout="column">
           <div fxLayout="row">
                 <div class="name"><h2>{{resume.name}}</h2></div>
                 <div class="surname"><h2>{{resume.surname.charAt(0)}}.</h2></div>
-                <div> <img src="{{resume.profilePic}}" class="user-profile" alt="Profile"></div>
+                <div fxFlex="20"></div>
+                <div fxFlex="40"> <img src="{{resume.profilePic}}" class="user-profile" alt="Profile"></div>
           </div>
             <div><p class="position">{{resume.position}} </p></div>
         </div>
@@ -73,7 +74,7 @@
         <div>
           <h2>IT Knowledge</h2>
         </div>
-        <div class=" mb-2" fxLayout="column" *ngFor="let itlanguage of resume.itKnowledge" fxLayoutGap="10px;">
+        <div class="mb-2" fxLayout="column" *ngFor="let itlanguage of resume.itKnowledge" fxLayoutGap="10px;">
           <div fxLayout="column" fxLayoutGap="20px;">
             <div fxLayout="row" fxLayoutGap=15px>
               <div>{{itlanguage.itSkill}}</div>
@@ -97,7 +98,7 @@
         </div>
       </div>
 
-      <div class="bg-image-footer">
+      <div class="bg-image-footer ml-2">
       </div>
 
     </div>
