@@ -39,40 +39,46 @@ export class DisplayUserComponent implements OnInit {
   }
 
   public downloadCv() {
-    // const data = document.getElementById('contentToConvert');
-    // html2canvas(data).then(canvas => {
-    //   // Few necessary setting options
-    //   const imgWidth = 208;
-    //   const imgHeight = canvas.height * imgWidth / canvas.width;
+    const data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options
+      const imgWidth = 208;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
 
-    //   const contentDataURL = canvas.toDataURL('image/png');
-    //   const pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
-    //   const position = 0;
-    //   pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-    //   pdf.save('MYPdf.pdf'); // Generated PDF
+      const contentDataURL = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+      const position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+
+      setTimeout(function() {
+          pdf.save('Cv.pdf');
+        }, 3000);
+
+        //   pdf.save('MYPdf.pdf'); // Generated PDF
     // });
 
-    const doc = new jsPDF();
-    const specialElementHandlers = {
-      '#editor'(element, renderer) {
-        return true;
-      }
-    };
+  //   const doc = new jsPDF();
+  //   const specialElementHandlers = {
+  //     '#editor'(element, renderer) {
+  //       return true;
+  //     }
+  //   };
 
-    const content = this.content.nativeElement;
-    doc.fromHTML(content.innerHTML, 15, 15, {
-      width : 50,
-      elementHandlers : specialElementHandlers
-    });
+  //   const content = this.content.nativeElement;
+  //   doc.fromHTML(content.innerHTML, 15, 15, {
+  //     width : 50,
+  //     elementHandlers : specialElementHandlers
+  //   });
 
-    // tslint:disable-next-line: only-arrow-functions
-    setTimeout(function() {
-      doc.save('Cv.pdf');
-    }, 0);
+  //   // tslint:disable-next-line: only-arrow-functions
+  //   setTimeout(function() {
+  //     doc.save('Cv.pdf');
+  //   }, 0);
 
-    doc.addHTML(document.body, function() {
-      doc.save('*.pdf');
+  //   doc.addHTML(document.body, function() {
+  //     doc.save('*.pdf');
+  // });
+  // }
   });
-  }
-
+}
 }

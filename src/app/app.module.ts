@@ -11,11 +11,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthModule } from './modules/auth/auth.module';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { JwtInterceptor } from './interceptors/jwtinterceptor';
-
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 
 @NgModule({
@@ -27,6 +27,7 @@ import { LoginGuard } from './guards/login.guard';
     HttpClientModule,
     AuthModule,
     UserModule,
+    DashboardModule,
     SharedModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,

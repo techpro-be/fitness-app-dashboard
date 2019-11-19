@@ -7,41 +7,22 @@ import { LayoutComponent } from './shared/components/layout/layout.component';
 
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   pathMatch: 'full',
-  //   redirectTo: 'user-center'
-  // },
-  // {
-  //   path: 'auth',
-  //   loadChildren: 'src/app/modules/auth/auth.module#AuthModule',
-  //   canActivate: [LoginGuard]
-  // },
-  // {
-  //   path: 'user-center',
-  //   loadChildren: 'src/app/modules/user/user.module#UserModule',
-  //   canActivate: [AuthGuard]
-  // },
-  // {
-  //   path: '**',
-  //   component: NotFoundComponent
-  // },
-
   {
     path: '',
-    redirectTo: '/user',
+    redirectTo: 'user',
     pathMatch: 'full'
-
   },
-  { path: 'auth',
-  loadChildren: () => import('src/app/modules/auth/auth.module').then(m => m.AuthModule),
-  canActivate: [LoginGuard]
+  {
+    path: 'auth',
+    loadChildren: () => import('src/app/modules/auth/auth.module').then(m => m.AuthModule),
+    canActivate: [LoginGuard]
   },
-  // {
-  //   path: 'auth',
-  //   loadChildren: 'src/app/modules/auth/auth.module#AuthModule',
-  //   canActivate: [LoginGuard]
-  // },
+  {
+    path: 'dashboard',
+    component: LayoutComponent,
+    loadChildren: () => import('src/app/modules/dashboard/dashboard.module').then(m => m.DashboardModule),
+    // canActivate: [AuthGuard]
+  },
   {
     path: 'user',
     component: LayoutComponent,
