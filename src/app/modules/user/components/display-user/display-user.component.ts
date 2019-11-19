@@ -22,8 +22,7 @@ export class DisplayUserComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public afs: AngularFirestore,
-    private userService: UserService)
-    {
+    private userService: UserService) {
       this.route.params.subscribe(params => this.id = params.id);
   }
 
@@ -69,6 +68,11 @@ export class DisplayUserComponent implements OnInit {
     // tslint:disable-next-line: only-arrow-functions
     setTimeout(function() {
       doc.save('Cv.pdf');
-  }, 0);
+    }, 0);
+
+    doc.addHTML(document.body, function() {
+      doc.save('*.pdf');
+  });
   }
+
 }

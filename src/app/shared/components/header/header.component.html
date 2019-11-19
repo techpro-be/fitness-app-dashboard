@@ -1,0 +1,38 @@
+<mat-toolbar>
+  <div>
+    <button mat-icon-button type="button" (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div [routerLink]="['/dashboard']" class="cursor-header">TechPro</div>
+
+  <div fxFlex fxLayoutAlign="end center" fxHide.xs fxLayoutGap="0.5rem">
+    <div fxLayout="row" class="h-3">
+      <!-- <button mat-button *ngIf="isAuth" [matMenuTriggerFor]="notificationsMenu">
+        <mat-icon>notifications</mat-icon>
+      </button> -->
+      <!-- <mat-menu #notificationsMenu="matMenu">
+        <button mat-menu-item [routerLink]="['/notifications']">New Notifications</button>
+      </mat-menu> -->
+
+      <button mat-button *ngIf="isAuth" [routerLink]="['/user/user-list']">
+        Users
+      </button>
+
+      <button mat-button *ngIf="isAuth" [routerLink]="['/auth/login']">
+        Logout
+      </button>
+
+      <!-- <button mat-button *ngIf="isAuth" [matMenuTriggerFor]="profileMenu">
+        Profile
+      </button>
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item [routerLink]="['/profile']">Edit Profile</button>
+        <button mat-menu-item [routerLink]="['/settings']">Settings</button>
+        <button mat-menu-item (click)="onLogout()" [routerLink]="['/auth/login']">
+          Logout
+        </button>
+      </mat-menu> -->
+    </div>
+  </div>
+</mat-toolbar>

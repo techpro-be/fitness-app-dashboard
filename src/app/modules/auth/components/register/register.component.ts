@@ -74,7 +74,7 @@ export class RegisterComponent implements OnInit {
         )
         .then(
           resp => {
-            this.router.navigate(['/user-list']);
+            this.router.navigate(['/user/user-list']);
             this.isLoading = false;
           })
         .catch(error => {

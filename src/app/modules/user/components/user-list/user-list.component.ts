@@ -6,7 +6,6 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CV } from 'src/app/shared/cv.model';
 
 @Component({
   selector: 'app-user-list',

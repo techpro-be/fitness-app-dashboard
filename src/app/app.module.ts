@@ -14,6 +14,8 @@ import { JwtInterceptor } from './interceptors/jwtinterceptor';
 
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 
 @NgModule({
@@ -33,16 +35,15 @@ import { AngularFireModule } from '@angular/fire';
     AppRoutingModule,
   ],
   providers: [
-    AngularFirestore ,
+    AuthGuard,
+    LoginGuard,
+    AngularFirestore,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
       multi: true,
     },
-    {
-      provide: FirestoreSettingsToken,
-      useValue: {}
-    }
+    { provide: FirestoreSettingsToken, useValue: {} }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

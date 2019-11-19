@@ -1,0 +1,60 @@
+<div fxLayout="column" class=" sidenav-color mt-1" fxLayoutGap="5px">
+  <div fxLayout="column" fxFlex fxLayoutAlign="center center">
+    <img
+      class="rounded-image"
+      src="http://dnadoeproject.org/wp-content/uploads/2018/10/St-Tammany.png"
+      alt="profile image"
+    />
+    <p>{{ username }}</p>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="0.5rem" class="mt-1">
+    <button
+      fxLayoutAlign="start start"
+      mat-button
+      class="full-width"
+      (click)="onClose()"
+      *ngIf="isAuth"
+      [routerLink]="['/dashboard']"
+    >
+      <mat-icon class="pr-1">dashboard</mat-icon>
+      Dashboard
+    </button>
+
+    <button
+      mat-button
+      fxLayoutAlign="start start"
+      class="full-width"
+      (click)="onClose()"
+      *ngIf="isAuth"
+      [routerLink]="['/user/user-list']"
+    >
+      <mat-icon class="pr-1">supervised_user_circle</mat-icon>
+      Users
+    </button>
+    <!-- <button
+      mat-button
+      fxLayoutAlign="start start"
+      class="full-width"
+      (click)="onClose()"
+      *ngIf="isAuth"
+      [routerLink]="['/settings']"
+    >
+      <mat-icon class="pr-1">settings</mat-icon>
+      Settings
+    </button> -->
+    <button
+      mat-button
+      fxLayoutAlign="start start"
+      class="full-width"
+      (click)="onLogout()"
+      *ngIf="isAuth"
+      routerLink="/auth/login"
+    >
+      <mat-icon class="pr-1">eject</mat-icon>
+      <span class="nav-caption">Logout</span>
+    </button>
+  </div>
+</div>

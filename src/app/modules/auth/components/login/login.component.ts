@@ -53,8 +53,8 @@ export class LoginComponent implements OnInit {
           this.loginForm.value.password
         )
         .then(resp => {
-          this.router.navigate(['/user-list']);
-          this.snackBar.open('Welcome back to Swish Contract,', null, {
+          this.router.navigate(['/user/user-list']);
+          this.snackBar.open('Welcome to TechPro', null, {
             duration: 3000
           });
         })
