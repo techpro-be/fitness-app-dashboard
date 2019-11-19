@@ -14,8 +14,8 @@ import { CV } from 'src/app/shared/cv.model';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit, AfterViewInit {
-
-  displayedColumns = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
+  // headElements = ['ID', 'First', 'Last', 'Handle'];
+  headElements = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
   dataSource = new MatTableDataSource<Resume>();
   sort: MatSort;
   paginator: MatPaginator;

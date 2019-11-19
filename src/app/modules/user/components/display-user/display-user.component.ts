@@ -22,7 +22,8 @@ export class DisplayUserComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public afs: AngularFirestore,
-    private userService: UserService) {
+    private userService: UserService)
+    {
       this.route.params.subscribe(params => this.id = params.id);
   }
 

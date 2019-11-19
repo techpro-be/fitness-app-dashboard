@@ -83,29 +83,29 @@ export class AuthService {
     });
   }
 
-  googleSignIn() {
-    return new Promise<any>((resolve, reject) => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('profile');
-      provider.addScope('email');
-      this.afAuth.auth
-        .signInWithPopup(provider)
-        .then(
-          (response: any) => {
-            this.db.collection('users').add({
-              uid: response.user.uid,
-              photo: response.user.photoURL,
-              name: response.user.displayName,
-              token: response.user.ra,
-            }),
-              resolve(response);
-          },
-          err => {
-            reject(err);
-          }
-        );
-    });
-  }
+  // googleSignIn() {
+  //   return new Promise<any>((resolve, reject) => {
+  //     const provider = new firebase.auth.GoogleAuthProvider();
+  //     provider.addScope('profile');
+  //     provider.addScope('email');
+  //     this.afAuth.auth
+  //       .signInWithPopup(provider)
+  //       .then(
+  //         (response: any) => {
+  //           this.db.collection('users').add({
+  //             uid: response.user.uid,
+  //             photo: response.user.photoURL,
+  //             name: response.user.displayName,
+  //             token: response.user.ra,
+  //           }),
+  //             resolve(response);
+  //         },
+  //         err => {
+  //           reject(err);
+  //         }
+  //       );
+  //   });
+  // }
 
   onResetPassword(email: string) {
     return new Promise<any>((resolve, reject) => {

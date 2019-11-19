@@ -30,26 +30,18 @@ export class LoginComponent implements OnInit {
       })
     });
   }
-  onGoogleSignIn(user?: IUser) {
-    this.authService.googleSignIn()
-      .then(response => {
-        this.router.navigate(['/user-list']);
 
-        // user.displayName = response.user.displayName;
-        // user.photoURL = response.user.photoURL;
-        // user.uid = response.user.uid;
-        // console.log('Response from login component', response);
-
-        // this.snackBar.open('You have been signed in, welcome', response.user.displayName, {
-        //   duration: 3000
-        // });
-      })
-      .catch(error => {
-        this.snackBar.open(error.message, null, {
-          duration: 3000
-        });
-      });
-  }
+  // onGoogleSignIn(user?: IUser) {
+  //   this.authService.googleSignIn()
+  //     .then(response => {
+  //       this.router.navigate(['/user-list']);
+  //     })
+  //     .catch(error => {
+  //       this.snackBar.open(error.message, null, {
+  //         duration: 3000
+  //       });
+  //     });
+  // }
 
 
 
