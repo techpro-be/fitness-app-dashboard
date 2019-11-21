@@ -5,14 +5,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { NotFoundComponent } from '../components/not-found/not-found.component';
-import { NavbarComponent } from 'src/app/navbar/navbar.component';
+import { HeaderComponent } from '../components/header/header.component';
+import { SidenavListComponent } from '../components/sidenav-list/sidenav-list.component';
+import { LayoutComponent } from '../components/layout/layout.component';
 
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations:
     [
-      NotFoundComponent
+      HeaderComponent,
+      SidenavListComponent,
+      NotFoundComponent,
+      LayoutComponent
     ],
   imports: [
     CommonModule,
@@ -27,7 +32,11 @@ import { NavbarComponent } from 'src/app/navbar/navbar.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    RouterModule
+    RouterModule,
+    HeaderComponent,
+    SidenavListComponent,
+    NotFoundComponent,
+    LayoutComponent
   ],
 })
 export class SharedModule { }

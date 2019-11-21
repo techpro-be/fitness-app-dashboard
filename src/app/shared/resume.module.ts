@@ -15,7 +15,7 @@
   languages: {
     [key: string]: Language
    };
-  itKnowledge: {
+   itKnowledge: {
     [key: string]: itKnowledge
    };
   profilePic: string;
@@ -31,7 +31,7 @@
 
  export interface itKnowledge {
   itSkill: string;
-  level: string;
+  itLevel: string;
 }
 
  export interface Education {

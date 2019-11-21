@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import * as jspdf from 'jspdf';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Resume } from 'src/app/shared/resume.module';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 @Component({
   selector: 'app-display-user',
   templateUrl: './display-user.component.html',
@@ -11,23 +15,30 @@ import { Input } from '@angular/core';
 })
 export class DisplayUserComponent implements OnInit {
 
-  @Input() resumes;
-  resume: any;
+  @ViewChild('content', {static: false}) content: ElementRef;
+  resume$: Observable<Resume>;
+  id: string;
+
   constructor(
     private route: ActivatedRoute,
+    public afs: AngularFirestore,
     private userService: UserService) {
-
+      this.route.params.subscribe(params => this.id = params.id);
   }
-  // this.route.paramMap.subscribe(params => {
+
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.userService.getObjectById(params.id).subscribe( i => {
-        this.resume = i;
-    });
-    });
+
+    // this.route.params.subscribe(params => {
+    //   this.userService.getObjectById(params.id).subscribe( id => {
+    //     this.resume = id;
+    // });
+    // });
+    this.resume$ = this.afs
+       .doc<Resume>('cvForm/' + this.id)
+       .valueChanges();
   }
 
-  public captureScreen() {
+  public downloadCv() {
     const data = document.getElementById('contentToConvert');
     html2canvas(data).then(canvas => {
       // Few necessary setting options
@@ -35,17 +46,39 @@ export class DisplayUserComponent implements OnInit {
       const imgHeight = canvas.height * imgWidth / canvas.width;
 
       const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      const pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
       const position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('MYPdf.pdf'); // Generated PDF
-    });
-  }
 
-  // captureScreenWord() {
-  //   const converted = htmlDocx.asBlob(contentToConvert);
-  //   saveAs(converted, 'test.docx');
+      setTimeout(function() {
+          pdf.save('Cv.pdf');
+        }, 3000);
+
+        //   pdf.save('MYPdf.pdf'); // Generated PDF
+    // });
+
+  //   const doc = new jsPDF();
+  //   const specialElementHandlers = {
+  //     '#editor'(element, renderer) {
+  //       return true;
+  //     }
+  //   };
+
+  //   const content = this.content.nativeElement;
+  //   doc.fromHTML(content.innerHTML, 15, 15, {
+  //     width : 50,
+  //     elementHandlers : specialElementHandlers
+  //   });
+
+  //   // tslint:disable-next-line: only-arrow-functions
+  //   setTimeout(function() {
+  //     doc.save('Cv.pdf');
+  //   }, 0);
+
+  //   doc.addHTML(document.body, function() {
+  //     doc.save('*.pdf');
+  // });
   // }
-
-
+  });
+}
 }

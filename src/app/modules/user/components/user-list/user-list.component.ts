@@ -1,9 +1,11 @@
-import { Component, OnInit, AfterViewInit} from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input} from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { UserService } from '../../services/user.service';
 import { Resume } from 'src/app/shared/resume.module';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -11,34 +13,33 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit, AfterViewInit {
-
-  id: any;
-  resumeDoc: AngularFirestoreDocument<Resume>;
-  resumeCollection: AngularFirestoreCollection<Resume>;
-  resumes: any = [];
-
-  displayedColumns = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
+  // headElements = ['ID', 'First', 'Last', 'Handle'];
+  headElements = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
   dataSource = new MatTableDataSource<Resume>();
   sort: MatSort;
   paginator: MatPaginator;
 
+  resumeCollection: AngularFirestoreCollection<Resume>;
+  resumes$: Observable<Resume[]>;
+  id: string;
+
   constructor(
     private userService: UserService,
-    public afs: AngularFirestore
-    ) {}
+    public afs: AngularFirestore,
+    private router: Router
+    ) {
+      this.resumes$ = this.afs.collection<Resume>('cvForm')
+     .snapshotChanges().pipe(
+       map(actions => actions.map(a => {
+         const data = a.payload.doc.data() as Resume;
+         const id = a.payload.doc.id;
+         return { id, ...data };
+       }))
+     );
+    }
 
   ngOnInit() {
-
-    this.resumeCollection = this.afs.collection('cvForm' , ref => ref.orderBy('name', 'asc'));
-    this.resumes = this.resumeCollection
-       .snapshotChanges()
-       .pipe(map(response => {
-         return response.map(cvdata => {
-           const data = cvdata.payload.doc.data() as Resume;
-           this.id = cvdata.payload.doc.id;
-           return data;
-         });
-       }));
+    this.resumes$.subscribe(data => console.log(data));
   }
 
   ngAfterViewInit() {
@@ -53,7 +54,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
   onDeleteForm(id) {
     this.userService.deleteUser(id);
   }
-
 
 }
 
