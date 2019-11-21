@@ -8,14 +8,8 @@ import { UserModule } from './modules/user/user.module';
 import { SharedModule } from './shared/modules/shared.module';
 import { AngularFirestoreModule, AngularFirestore, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthModule } from './modules/auth/auth.module';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { JwtInterceptor } from './interceptors/jwtinterceptor';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
-import { AuthGuard } from './guards/auth.guard';
-import { LoginGuard } from './guards/login.guard';
-import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 
 @NgModule({
@@ -25,9 +19,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AuthModule,
     UserModule,
-    DashboardModule,
     SharedModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
@@ -36,15 +28,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     AppRoutingModule,
   ],
   providers: [
-    AuthGuard,
-    LoginGuard,
-    AngularFirestore,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
-      multi: true,
-    },
-    { provide: FirestoreSettingsToken, useValue: {} }
+    AngularFirestore
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

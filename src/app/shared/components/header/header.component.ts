@@ -1,4 +1,4 @@
-import { AuthService } from 'src/app/modules/auth/services/auth.service';
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
     return this.isAuthenticated;
   }
 
-  constructor(private authService: AuthService) { }
+  constructor() { }
 
   ngOnInit() { }
 
@@ -28,7 +28,4 @@ export class HeaderComponent implements OnInit {
     this.sidenavToggle.emit();
   }
 
-  onLogout() {
-    this.authService.logout();
-  }
 }

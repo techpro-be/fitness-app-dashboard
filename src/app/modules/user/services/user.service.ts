@@ -1,9 +1,8 @@
 import {Subject, Observable} from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Subscription } from 'rxjs';
 import { Resume } from 'src/app/shared/resume.module';
-import { map } from 'rxjs/operators';
+import * as firebase from 'firebase/app';
 
 
 @Injectable({
@@ -11,11 +10,35 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
 
-
   resumeCollection: AngularFirestoreCollection<Resume>;
   resumes: Observable<any>;
   resumeDoc: AngularFirestoreDocument<Resume>;
   constructor( private afs: AngularFirestore) {}
+
+  getCurrentUser() {
+
+    return new Promise<any>((resolve, reject) => {
+      const user: any = firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          resolve(user);
+        } else {
+          reject('No user logged in');
+        }
+      });
+    });
+  }
+
+  updateCurrentUser(value) {
+    return new Promise<any>((resolve, reject) => {
+      const user = firebase.auth().currentUser;
+      user.updateProfile({
+        displayName: value.name,
+        photoURL: user.photoURL
+      }).then(res => {
+        resolve(res);
+      }, err => reject(err));
+    });
+  }
 
 
   deleteUser(resume: Resume) {

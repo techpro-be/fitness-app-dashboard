@@ -15,13 +15,13 @@
         <button mat-menu-item [routerLink]="['/notifications']">New Notifications</button>
       </mat-menu> -->
 
-      <button mat-button *ngIf="isAuth" [routerLink]="['/user/user-list']">
+      <button mat-button  [routerLink]="['/user/user-list']">
         Users
       </button>
 
-      <button mat-button *ngIf="isAuth" [routerLink]="['/auth/login']">
+      <!-- <button mat-button  [routerLink]="['/auth/login']">
         Logout
-      </button>
+      </button> -->
 
       <!-- <button mat-button *ngIf="isAuth" [matMenuTriggerFor]="profileMenu">
         Profile

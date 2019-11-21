@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from './modules/auth/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,8 +9,5 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'work4eudashboard';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) { }
+  constructor() {}
 }

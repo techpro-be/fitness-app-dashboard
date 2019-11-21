@@ -1,4 +1,4 @@
-import { AuthService } from 'src/app/modules/auth/services/auth.service';
+
 import {
   Component,
   EventEmitter,
@@ -13,7 +13,7 @@ import {
   styleUrls: ['./sidenav-list.component.scss']
 })
 export class SidenavListComponent implements OnInit {
-  username = 'Mario';
+
   @Output() closeSidenav = new EventEmitter<void>();
   private isAuthenticated: boolean;
 
@@ -26,7 +26,7 @@ export class SidenavListComponent implements OnInit {
     return this.isAuthenticated;
   }
 
-  constructor(private authService: AuthService) { }
+  constructor() { }
 
   ngOnInit() { }
 
@@ -34,8 +34,8 @@ export class SidenavListComponent implements OnInit {
     this.closeSidenav.emit();
   }
 
-  onLogout() {
-    this.onClose();
-    this.authService.logout();
-  }
+  // onLogout() {
+  //   this.onClose();
+  //   this.authService.logout();
+  // }
 }
