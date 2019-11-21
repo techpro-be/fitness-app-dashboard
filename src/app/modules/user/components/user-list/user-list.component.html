@@ -56,12 +56,13 @@
 <table class="table table-striped">
   <thead>
   <tr>
-    <th scope="col">#</th>
+    <th scope="col">No</th>
     <th scope="col">Name</th>
     <th scope="col">Surname</th>
     <th scope="col">Phone</th>
     <th scope="col">Email</th>
-    <th scope="col">Addres</th>
+    <th scope="col">Address</th>
+    <th scope="col">Position</th>
     <th scope="col">Actions</th>
   </tr>
   </thead>
@@ -73,6 +74,8 @@
     <td>{{resume.phone}}</td>
     <td>{{resume.email}}</td>
     <td>{{resume.address}}</td>
+    <td>{{resume.position}}</td>
+
     <td><button  mat-raised-button color="warn" class="ml-1" onclick="onDeleteForm(resume.id)">Delete</button>
       <button mat-raised-button color="primary"  [routerLink]="['/display-user', resume.id]"
        routerLinkActive="router-link-active">Show</button></td>
