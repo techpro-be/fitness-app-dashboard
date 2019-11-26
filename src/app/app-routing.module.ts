@@ -6,16 +6,6 @@ import { WelcomeComponent } from './modules/welcome/welcome.component';
 import { AuthGuard } from './modules/auth/auth.guard';
 
 const routes: Routes = [
-  // {
-  //   path: 'user',
-  //   component: LayoutComponent,
-  //   loadChildren: () => import('src/app/modules/user/user.module').then(m => m.UserModule),
-  // },
-  // {
-  //   path: '',
-  //   pathMatch: 'full',
-  //   redirectTo: 'user/user-list'
-  // },
   {
     path: '',
     component: WelcomeComponent

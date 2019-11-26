@@ -17,7 +17,7 @@
   </thead>
   <tbody>
   <tr *ngFor="let resume of resumes$ | async; index as i">
-    <th scope="row">{{ i + 1 }}</th>
+    <th scope="row">{{ 1 + 1 }}</th>
     <td>{{ resume.name }}</td>
     <td>{{ resume.surname }}</td>
     <td>{{resume.phone}}</td>
@@ -34,28 +34,29 @@
 
 
 
-<!-- <div  dir="ltr" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="10px"*ngFor="let resume of resumes$ | async; index as i">
+<!-- <div  dir="ltr" fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="10px"*ngFor="let test of tests$ | async; index as i">
   <mat-card class="example-card">
       <mat-card-header>
-        <div mat-card-avatar class="img-user" [ngStyle]="{'background-image': 'url(' + resume.profilePic + ')'}">
+        <div mat-card-avatar class="img-user" [ngStyle]="{'background-image': 'url(' + test.profilePic + ')'}">
         </div>
-        <mat-card-title>{{resume.name}}</mat-card-title>
-        <mat-card-subtitle>{{resume.surname}}</mat-card-subtitle>
+        <mat-card-title>{{test.name}}</mat-card-title>
+        <mat-card-subtitle>{{test.surname}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <p>
-            {{resume.phone}}
+            {{test.name}}
         </p>
         <p>
-            {{resume.address}}
+            {{test.age}}
         </p>
         <p>
-            {{resume.email}}
-        </p>
+          {{test.testid}}
+      </p>
+
       </mat-card-content>
       <mat-card-actions>
-          <button  mat-raised-button color="warn" class="ml-1" onclick="onDeleteForm()">Delete</button>
-          <button mat-raised-button color="primary"  [routerLink]="['/display-user', resume.id]"
+          <button  mat-raised-button color="warn" class="ml-1" (click)="onDeleteForm($event, test)">Delete</button>
+          <button mat-raised-button color="primary"  [routerLink]="['/display-user', test.testid]"
            routerLinkActive="router-link-active">Show</button>
       </mat-card-actions>
     </mat-card>

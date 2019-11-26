@@ -1,5 +1,5 @@
 import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/store';
-import * as fromUi from './shared/ui.reducer';
+import * as fromUi from 'src/app/shared/ui.reducer';
 import * as fromAuth from 'src/app/modules/auth/auth.reducer';
 
 export interface State {

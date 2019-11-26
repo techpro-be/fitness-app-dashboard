@@ -5,6 +5,7 @@ import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { UserService } from '../../user.service';
 
 @Component({
   selector: 'app-user-list',
@@ -12,18 +13,19 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-  // headElements = ['ID', 'First', 'Last', 'Handle'];
+
   headElements = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
-  dataSource = new MatTableDataSource<Resume>();
-  sort: MatSort;
-  paginator: MatPaginator;
 
   resumeCollection: AngularFirestoreCollection<Resume>;
   resumes$: Observable<Resume[]>;
+  tests$: Observable<Resume[]>;
   id: string;
+  testid: string;
+
 
   constructor(
     public afs: AngularFirestore,
+    private userService: UserService,
     private router: Router
     ) {
       this.resumes$ = this.afs.collection<Resume>('cvForm')
@@ -34,11 +36,28 @@ export class UserListComponent implements OnInit {
          return { id, ...data };
        }))
      );
+
+      this.tests$ = this.afs.collection<Resume>('testCv')
+     .snapshotChanges().pipe(
+       map(actions => actions.map(a => {
+         const testdata = a.payload.doc.data() as Resume;
+         const testid = a.payload.doc.id;
+         return { testid, ...testdata };
+       }))
+     );
     }
 
   ngOnInit() {
     this.resumes$.subscribe();
   }
+
+  onDeleteForm(event, test) {
+    console.log('button clicked', test);
+    this.userService.deleteUser(test);
+
+
+  }
+
 }
 
 
