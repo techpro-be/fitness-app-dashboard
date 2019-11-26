@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
+import { WelcomeComponent } from './modules/welcome/welcome.component';
+import { AuthGuard } from './modules/auth/auth.guard';
 
 const routes: Routes = [
   // {
@@ -9,14 +11,19 @@ const routes: Routes = [
   //   component: LayoutComponent,
   //   loadChildren: () => import('src/app/modules/user/user.module').then(m => m.UserModule),
   // },
+  // {
+  //   path: '',
+  //   pathMatch: 'full',
+  //   redirectTo: 'user/user-list'
+  // },
   {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'user/user-list'
+    component: WelcomeComponent
   },
   {
     path: 'user',
-    loadChildren: 'src/app/modules/user/user.module#UserModule'
+    loadChildren: 'src/app/modules/user/user.module#UserModule',
+    canLoad: [AuthGuard]
   },
   {
     path: '**',
@@ -27,6 +34,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
