@@ -1,5 +1,5 @@
-import { Component, OnInit, AfterViewInit, Input} from '@angular/core';
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Component, OnInit} from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { UserService } from '../../services/user.service';
 import { Resume } from 'src/app/shared/resume.module';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit, AfterViewInit {
+export class UserListComponent implements OnInit {
   // headElements = ['ID', 'First', 'Last', 'Handle'];
   headElements = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
   dataSource = new MatTableDataSource<Resume>();
@@ -39,17 +39,10 @@ export class UserListComponent implements OnInit, AfterViewInit {
     }
 
   ngOnInit() {
-    this.resumes$.subscribe(data => console.log(data));
+    this.resumes$.subscribe();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
 
-  doFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
   onDeleteForm(id) {
     this.userService.deleteUser(id);
