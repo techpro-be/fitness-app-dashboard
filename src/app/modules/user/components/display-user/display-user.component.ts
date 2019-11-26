@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import { UserService } from '../../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { Input } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -22,17 +21,11 @@ export class DisplayUserComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public afs: AngularFirestore,
-    private userService: UserService) {
+   ) {
       this.route.params.subscribe(params => this.id = params.id);
   }
 
   ngOnInit() {
-
-    // this.route.params.subscribe(params => {
-    //   this.userService.getObjectById(params.id).subscribe( id => {
-    //     this.resume = id;
-    // });
-    // });
     this.resume$ = this.afs
        .doc<Resume>('cvForm/' + this.id)
        .valueChanges();
@@ -50,6 +43,7 @@ export class DisplayUserComponent implements OnInit {
       const position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
 
+      // tslint:disable-next-line:only-arrow-functions
       setTimeout(function() {
           pdf.save('Cv.pdf');
         }, 3000);

@@ -1,6 +1,5 @@
 import { Component, OnInit} from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { UserService } from '../../services/user.service';
 import { Resume } from 'src/app/shared/resume.module';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { map } from 'rxjs/operators';
@@ -24,7 +23,6 @@ export class UserListComponent implements OnInit {
   id: string;
 
   constructor(
-    private userService: UserService,
     public afs: AngularFirestore,
     private router: Router
     ) {
@@ -41,13 +39,6 @@ export class UserListComponent implements OnInit {
   ngOnInit() {
     this.resumes$.subscribe();
   }
-
-
-
-  onDeleteForm(id) {
-    this.userService.deleteUser(id);
-  }
-
 }
 
 
