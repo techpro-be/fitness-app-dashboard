@@ -6,6 +6,7 @@
   phone: number;
   email: string;
   personalBackground: string;
+  review: string;
   experiences: {
     [key: string]: Experience
    };

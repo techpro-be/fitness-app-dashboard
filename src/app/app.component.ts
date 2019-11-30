@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from './modules/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +7,10 @@ import { AuthService } from './modules/auth/auth.service';
 })
 export class AppComponent  implements OnInit {
   title = 'work4eudashboard';
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.authService.initAuthListener();
+
   }
 }
 

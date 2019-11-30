@@ -8,6 +8,7 @@ import { NotFoundComponent } from '../components/not-found/not-found.component';
 import { HeaderComponent } from '../components/header/header.component';
 import { SidenavListComponent } from '../components/sidenav-list/sidenav-list.component';
 import { LayoutComponent } from '../components/layout/layout.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { LayoutComponent } from '../components/layout/layout.component';
   imports: [
     CommonModule,
     FormsModule,
+    NgbModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule,
@@ -32,6 +34,7 @@ import { LayoutComponent } from '../components/layout/layout.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
+    NgbModule,
     RouterModule,
     HeaderComponent,
     SidenavListComponent,

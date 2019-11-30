@@ -1,0 +1,142 @@
+<div fxLayoutAlign = "center center">
+    <mat-form-field fxFlex = "40%">
+    <input matInput type= "text" (keyup)="doFilter($event.target.value)" placeholder="Filter"> <!--keyup, a event listener that fires dofilter method-->
+  </mat-form-field>
+</div>
+
+  <mat-table  [dataSource]="dataSource" matSort >
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="surname">
+      <mat-header-cell *matHeaderCellDef> Surname</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.surname }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="phone" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="position" >
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Position</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions" >
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.actions}}
+            <button  mat-raised-button color="warn" class="ml-1" (click)="onDeleteForm()">Delete</button>
+            <button mat-raised-button color="primary"  [routerLink]="['/usertest', element.id]"
+             routerLinkActive="router-link-active">Show</button>
+        </mat-cell>
+
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="headElements"> </mat-header-row>
+    <mat-row *matRowDef="let row; columns: headElements;"> </mat-row>
+
+  </mat-table>
+
+  <mat-paginator [pageSize]="1" [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+
+<div>
+  <div fxLayoutAlign="center center">
+    <h1>Users List</h1>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Address</th>
+      <th scope="col">Position</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let resume of resumes$ | async; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ resume.name }}</td>
+      <td>{{ resume.surname }}</td>
+      <td>{{resume.phone}}</td>
+      <td>{{resume.email}}</td>
+      <td>{{resume.address}}</td>
+      <td>{{resume.position}}</td>
+
+      <td>
+        <button  mat-raised-button color="warn" class="ml-1" (click)="onDeleteForm()">Delete</button>
+        <button mat-raised-button color="primary"  [routerLink]="['/usertest', resume.id]"routerLinkActive="router-link-active">Show</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <!-- Create HTML -->
+  <!-- <button (click)="showForm = true" class="btn btn-primary">Create Article</button>
+  <div *ngIf="showForm">
+  <form (ngSubmit)="onSubmit()" #createArticleForm="ngForm" novalidate>
+   <div class="form-group">
+     <label for="name">Name</label>
+     <input type="text" [(ngModel)]="newUser.name" name="name" class="form-control" id="name">
+   </div>
+   <div class="form-group">
+     <label for="surname">Surname</label>
+     <input type="text" [(ngModel)]="newUser.surname" name="surname" class="form-control" id="surname">
+   </div>
+   <div class="form-group">
+     <label for="personalBackground">Personal Background</label>
+     <input type="text" [(ngModel)]="newUser.personalBackground" name="personalBackground" class="form-control" id="personalBackground">
+   </div>
+   <button type="submit" class="btn btn-success">Submit</button>
+   <button type="button" (click)="showForm = false" class="btn btn-primary">Cancel</button>
+  </form>
+  </div> -->
+  </div>
+<!-- <div>
+  <h1>Articles List</h1>
+  <p>Below is a list of dynamic article links</p>
+  <div class="row" ng-if="i % 3 === 0">
+  <div class="col-sm-4" *ngFor="let article of articles$ | async; index as i">
+   <div class="thumbnail">
+     <a [routerLink]="['/usertest', article.id]">
+       <img [src]="article.img" [alt]="article.title" style="width:100%">
+       <div class="caption">
+         <p>{{ article.description}}</p>
+       </div>
+     </a>
+   </div>
+  </div>
+  </div>
+
+  <button (click)="showForm = true" class="btn btn-primary">Create Article</button>
+  <div *ngIf="showForm">
+  <form (ngSubmit)="onSubmit()" #createArticleForm="ngForm" novalidate>
+   <div class="form-group">
+     <label for="title">Title</label>
+     <input type="text" [(ngModel)]="newUser.title" name="title" class="form-control" id="title">
+   </div>
+   <div class="form-group">
+     <label for="img">Image URL</label>
+     <input type="text" [(ngModel)]="newUser.img" name="img" class="form-control" id="img">
+   </div>
+   <div class="form-group">
+     <label for="description">Description</label>
+     <input type="text" [(ngModel)]="newUser.description" name="description" class="form-control" id="description">
+   </div>
+   <button type="submit" class="btn btn-success">Submit</button>
+   <button type="button" (click)="showForm = false" class="btn btn-primary">Cancel</button>
+  </form>
+  </div>
+  </div> -->

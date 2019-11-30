@@ -11,17 +11,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { WelcomeComponent } from './modules/welcome/welcome.component';
-import { AuthService } from './modules/auth/auth.service';
-import { UIService } from './shared/ui.service';
-import { StoreModule } from '@ngrx/store';
-import { reducers } from './app.reducer';
-import { AuthModule } from './modules/auth/auth.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent
+
   ],
   imports: [
     BrowserModule,
@@ -31,12 +27,11 @@ import { AuthModule } from './modules/auth/auth.module';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AuthModule,
-    AppRoutingModule,
-    StoreModule.forRoot(reducers)
+    AppRoutingModule
   ],
-  providers: [AuthService, UIService],
+  providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

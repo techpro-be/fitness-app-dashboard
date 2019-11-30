@@ -1,12 +1,12 @@
 import { Component, OnInit} from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Resume } from 'src/app/shared/resume.module';
+import { Resume } from 'src/app/shared/models/resume.model';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserService } from '../../user.service';
-import { AuthService } from 'src/app/modules/auth/auth.service';
+
 
 @Component({
   selector: 'app-user-list',
@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/modules/auth/auth.service';
 })
 export class UserListComponent implements OnInit {
 
-  headElements = ['name', 'surname', 'phone', 'email', 'address', 'actions'];
+  headElements = ['name', 'surname', 'phone', 'email', 'position', 'actions'];
 
   resumeCollection: AngularFirestoreCollection<Resume>;
   resumes$: Observable<Resume[]>;
@@ -27,7 +27,6 @@ export class UserListComponent implements OnInit {
   constructor(
     public afs: AngularFirestore,
     private userService: UserService,
-    private authService: AuthService,
     private router: Router
     ) {
       this.resumes$ = this.afs.collection<Resume>('cvForm')
@@ -53,14 +52,14 @@ export class UserListComponent implements OnInit {
     this.resumes$.subscribe();
   }
 
-  onDeleteForm(event, test) {
-    console.log('button clicked', test);
-    this.userService.deleteUser(test);
+  onDeleteForm() {
+    console.log('button clicked');
+    // this.userService.deleteUser(test);
 
 
   }
   onLogout() {
-    this.authService.logout();
+    // this.authService.logout();
     this.router.navigate(['/login']);
   }
 

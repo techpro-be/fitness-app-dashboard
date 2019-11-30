@@ -4,7 +4,7 @@ import html2canvas from 'html2canvas';
 import { ActivatedRoute } from '@angular/router';
 import { Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Resume } from 'src/app/shared/resume.module';
+import { Resume } from 'src/app/shared/models/resume.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
