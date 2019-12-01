@@ -1,8 +1,15 @@
-<app-layout>
+<app-header></app-header>
   <div class="welcome" fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="20px" fxLayoutAlign="center center">
   <section>
     <h1>TechPro</h1>
     <p>Welcome to TechPro</p>
+    <button mat-button  [routerLink]="['/user/userstest']">
+      Users
+    </button>
+
+    <button mat-button  [routerLink]="['/customers']">
+      Customers
+    </button>
   </section>
 </div>
-</app-layout>
+

@@ -6,33 +6,43 @@ import { UserListComponent } from './modules/user/components/user-list/user-list
 import { DisplayUserComponent } from './modules/user/components/display-user/display-user.component';
 import { UsersComponent } from './modules/user/components/users/users.component';
 import { UserComponent } from './modules/user/components/user/user.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'userstest'
+    redirectTo: 'users'
   },
-  // {
-  //   path: 'user',
-  //   loadChildren: 'src/app/modules/user/user.module#UserModule',
-  // },
+  {
+    path: 'auth',
+    loadChildren: 'src/app/modules/auth/auth.module#AuthModule',
+    canActivate: [LoginGuard]
+  },
   {
     path: 'users',
-    component: UserListComponent
+    loadChildren: 'src/app/modules/user/user.module#UserModule',
+    canActivate: [AuthGuard]
   },
-  {
-    path: 'user/:id',
-    component: DisplayUserComponent
-  },
-  {
-    path: 'userstest',
-    component: UsersComponent
-  },
-  {
-    path: 'usertest/:id',
-    component: UserComponent
-  },
+  // {
+  //   path: 'users',
+  //   component: UserListComponent
+  // },
+  // {
+  //   path: 'user/:id',
+  //   component: DisplayUserComponent
+  // },
+  // {
+  //   path: 'userstest',
+  //   component: UsersComponent,
+  //   canActivate: [AuthGuard]
+  // },
+  // {
+  //   path: 'usertest/:id',
+  //   component: UserComponent,
+  //   canActivate: [AuthGuard]
+  // },
   {
     path: '**',
     component: NotFoundComponent
@@ -44,6 +54,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [AuthGuard, LoginGuard]
 })
 export class AppRoutingModule { }

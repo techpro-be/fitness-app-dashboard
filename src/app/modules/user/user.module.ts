@@ -6,13 +6,15 @@ import { DisplayUserComponent } from './components/display-user/display-user.com
 import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { UsersComponent } from './components/users/users.component';
 import { UserComponent } from './components/user/user.component';
+import { WelcomeComponent } from '../welcome/welcome.component';
 
 @NgModule({
   declarations: [
     UserListComponent,
     DisplayUserComponent,
     UsersComponent,
-    UserComponent
+    UserComponent,
+    WelcomeComponent
   ],
   imports: [
     CommonModule,
