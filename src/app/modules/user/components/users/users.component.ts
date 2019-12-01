@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit {
   dataSource = new MatTableDataSource<Resume>();
   sort: MatSort;
   paginator: MatPaginator;
-  headElements = ['name', 'surname', 'phone', 'email', 'position', 'actions'];
+  headElements = ['no','name', 'surname', 'phone', 'email', 'position', 'actions'];
 
  constructor(private db: AngularFirestore,) {
     this.resumes$ = this.db.collection<Resume>('cvForm')

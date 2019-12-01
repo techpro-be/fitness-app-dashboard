@@ -6,6 +6,11 @@
 
   <mat-table  [dataSource]="dataSource" matSort >
 
+    <ng-container matColumnDef="no">
+      <mat-header-cell *matHeaderCellDef> No </mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index;">{{i +1}}</mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
@@ -17,12 +22,12 @@
     </ng-container>
 
     <ng-container matColumnDef="phone" >
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email" >
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
     </ng-container>
 
@@ -49,7 +54,7 @@
   <mat-paginator [pageSize]="1" [pageSizeOptions]="[5, 10, 25, 100]">
   </mat-paginator>
 
-<div>
+<!-- <div>
   <div fxLayoutAlign="center center">
     <h1>Users List</h1>
   </div>
@@ -82,7 +87,7 @@
       </td>
     </tr>
     </tbody>
-  </table>
+  </table> -->
   <!-- Create HTML -->
   <!-- <button (click)="showForm = true" class="btn btn-primary">Create Article</button>
   <div *ngIf="showForm">
@@ -103,7 +108,7 @@
    <button type="button" (click)="showForm = false" class="btn btn-primary">Cancel</button>
   </form>
   </div> -->
-  </div>
+  <!-- </div> -->
 <!-- <div>
   <h1>Articles List</h1>
   <p>Below is a list of dynamic article links</p>

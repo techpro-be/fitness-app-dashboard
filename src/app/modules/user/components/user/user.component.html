@@ -12,7 +12,7 @@
       </div>
   </div>
 
-  <div fxLayout="column" fxLayoutGap="10px" class="div-cv">   <!--Personal Background-->
+  <div fxLayout="column" *ngIf="resume.personalBackground" fxLayoutGap="10px" class="div-cv">   <!--Personal Background-->
     <div fxflex>
       <h2>Personal Background</h2>
       <div>{{resume.personalBackground}}</div>
@@ -29,7 +29,7 @@
   </div>
 
 
-  <div fxLayout="column" class="div-cv">   <!--Experience-->
+  <div fxLayout="column" class="div-cv" *ngIf="resume.experiences">   <!--Experience-->
          <div class="ml-2" >
             <h2>Work Experience</h2>
          </div>
