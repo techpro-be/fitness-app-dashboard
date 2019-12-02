@@ -8,6 +8,7 @@ import { UsersComponent } from './modules/user/components/users/users.component'
 import { UserComponent } from './modules/user/components/user/user.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
+import { LayoutComponent } from './shared/components/layout/layout.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,7 @@ const routes: Routes = [
   },
   {
     path: 'users',
+    component: LayoutComponent,
     loadChildren: 'src/app/modules/user/user.module#UserModule',
     canActivate: [AuthGuard]
   },

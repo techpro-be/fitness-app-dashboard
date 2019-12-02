@@ -12,13 +12,13 @@
       </div>
   </div>
 
-  <div fxLayout="column" *ngIf="resume.personalBackground" fxLayoutGap="10px" class="div-cv">   <!--Personal Background-->
+  <!-- <div fxLayout="column" *ngIf="resume.personalBackground" fxLayoutGap="10px" class="div-cv">
     <div fxflex>
       <h2>Personal Background</h2>
       <div>{{resume.personalBackground}}</div>
     </div>
         <mat-divider></mat-divider>
-  </div>
+  </div> -->
 
   <div fxLayout="column" *ngIf="resume.review" fxLayoutGap="10px" class="div-cv">   <!--Personal Background-->
     <div fxflex>
@@ -107,7 +107,7 @@
     </div>
   <!-- New Code -->
   <button (click)="showEditForm = true" class="btn btn-primary">Add review</button>
-  <div *ngIf="showEditForm">
+  <div *ngIf="showEditForm" fxLayoutGap="10px">
     <form (ngSubmit)="onEditFormSubmit()" #editArticleForm="ngForm" novalidate>
       <!-- <div class="form-group">
         <label for="title">Name</label>
@@ -121,8 +121,11 @@
         <label for="description"> TechPro Review</label>
         <input type="text" [(ngModel)]="newUser.review" name="review" class="form-control" id="review">
       </div>
-      <button type="submit" class="btn btn-success">Submit</button>
+      <div fxLayoutGap="10px">
+        <button type="submit" class="btn btn-success">Submit</button>
       <button type="button" (click)="onCancel()" class="btn btn-primary">Cancel</button>
+      </div>
+
     </form>
   </div>
   <!-- <button (click)="showForm = true" class="btn btn-primary">Add review</button>

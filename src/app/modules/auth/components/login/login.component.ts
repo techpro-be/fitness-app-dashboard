@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   onGoogleSignIn(user?: IUser) {
     this.authService.googleSignIn()
       .then(response => {
-        this.router.navigate(['/users']);
+        this.router.navigate(['/users/userstest']);
 
         // user.displayName = response.user.displayName;
         // user.photoURL = response.user.photoURL;
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
           this.loginForm.value.password
         )
         .then(resp => {
-          this.router.navigate(['/users']);
+          this.router.navigate(['/users/userstest']);
           this.snackBar.open('Welcome back to TechPro', null, {
             duration: 3000
           });
