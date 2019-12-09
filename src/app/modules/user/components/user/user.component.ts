@@ -15,12 +15,12 @@ export class UserComponent implements OnInit {
   resume$: Observable<Resume>;   // Observable of type Resume  id: String;   // will hold id passed through route (:id)
   id: any;
 
-  showEditForm: Boolean = false;
-  showForm: Boolean = false;
+  showEditForm = false;
+  showForm = false;
 
-  newUser:  Test ={
-    review: "",
-  }
+  newUser: Test = {
+    review: '',
+  };
 
   constructor(
     private db: AngularFirestore,
@@ -28,7 +28,7 @@ export class UserComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     // set 'id' when page loads from route params.id
-    this.route.params.subscribe(params => this.id = params.id)
+    this.route.params.subscribe(params => this.id = params.id);
   }
   ngOnInit() {
     // query Firestore using 'id' when page loads
@@ -43,7 +43,7 @@ export class UserComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.newUser);
-    this.db.collection<Test>('cvForm').add(this.newUser);  //adds new user into db
+    this.db.collection<Test>('cvForm').add(this.newUser);  // adds new user into db
     this.showForm = false;
   }
   onCancel() {
@@ -52,7 +52,7 @@ export class UserComponent implements OnInit {
 
   confirmDelete() {
     const answer = prompt('Are you sure you want to delete this user (yes or no)');
-    if(answer === "yes") {
+    if (answer === 'yes') {
     this.db.doc('cvForm/' + this.id).delete();
     this.router.navigate(['/userstest']);
   }
