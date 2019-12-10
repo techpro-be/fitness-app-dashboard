@@ -37,7 +37,7 @@ export class AuthService {
         .auth()
         .onAuthStateChanged(user => {
           if (user) {
-            console.log('User', user);
+            // console.log('User', user);
             resolve(user);
           } else {
             reject('Not authenticated!');
