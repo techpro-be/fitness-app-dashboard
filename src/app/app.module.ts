@@ -10,26 +10,35 @@ import { AngularFirestoreModule, AngularFirestore, FirestoreSettingsToken } from
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
-import { WelcomeComponent } from './modules/welcome/welcome.component';
+import { AuthModule } from './modules/auth/auth.module';
+import { JwtInterceptor } from './interceptors/jwtinterceptor';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    WelcomeComponent
-
+    AppComponent
   ],
   imports: [
     BrowserModule,
     UserModule,
+    AuthModule,
     SharedModule,
+    HttpClientModule,
     AngularFirestoreModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true,
+  },
+  {
+    provide: FirestoreSettingsToken,
+    useValue: {}
+  }],
   bootstrap: [AppComponent],
   entryComponents: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

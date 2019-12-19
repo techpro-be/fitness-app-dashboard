@@ -110,21 +110,7 @@ body {
 }
 
 .auth-background {
-  background-image: linear-gradient(
-    to right bottom,
-    #2661ae,
-    #206ab1,
-    #2173b3,
-    #277bb4,
-    #3183b5,
-    #3789b7,
-    #3d8fba,
-    #4495bc,
-    #459bc1,
-    #47a1c7,
-    #48a7cc,
-    #4aadd1
-  );
+  background-image: linear-gradient(to right top, #ffffff, #e8e8eb, #d1d1d8, #b9bbc5, #a1a6b3, #8c909c, #787a86, #656571, #4e4b53, #373237, #1f1c1e, #000000);
   background-position: center;
   background-size: cover;
   height: 100%;

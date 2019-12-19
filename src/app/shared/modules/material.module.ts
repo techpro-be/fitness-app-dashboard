@@ -43,7 +43,7 @@ import { NgModule } from '@angular/core';
     MatPaginatorModule,
     MatMenuModule,
     MatNativeDateModule,
-  MatDatepickerModule,
+    MatDatepickerModule,
     MatSnackBarModule,
     MatStepperModule
   ],

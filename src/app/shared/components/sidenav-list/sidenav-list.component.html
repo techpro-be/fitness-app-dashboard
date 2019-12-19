@@ -11,24 +11,24 @@
   <mat-divider></mat-divider>
 
   <div fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="0.5rem" class="mt-1">
-    <button
+    <!-- <button
       fxLayoutAlign="start start"
       mat-button
       class="full-width"
       (click)="onClose()"
       *ngIf="isAuth"
-      [routerLink]="['/dashboard']"
+      [routerLink]="['/users/userstest']"
     >
       <mat-icon class="pr-1">dashboard</mat-icon>
-      Dashboard
-    </button>
+      Users
+    </button> -->
 
     <button
       mat-button
       fxLayoutAlign="start start"
       class="full-width"
       (click)="onClose()"
-      [routerLink]="['/user/user-list']"
+      [routerLink]="['/users/userstest']"
     >
       <mat-icon class="pr-1">supervised_user_circle</mat-icon>
       Users
@@ -44,7 +44,7 @@
       <mat-icon class="pr-1">settings</mat-icon>
       Settings
     </button> -->
-    <!-- <button
+    <button
       mat-button
       fxLayoutAlign="start start"
       class="full-width"
@@ -54,6 +54,6 @@
     >
       <mat-icon class="pr-1">eject</mat-icon>
       <span class="nav-caption">Logout</span>
-    </button> -->
+    </button>
   </div>
 </div>
